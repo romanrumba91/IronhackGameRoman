@@ -1,0 +1,91 @@
+body{
+
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    align-content: space-around;
+    color: #FBF5F3;
+    justify-content: left;
+    background-color: gray;
+
+  }
+
+  h1 {
+    font-family: 'Press Start 2P', monospace;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 35px;
+    margin: 15px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  
+  }
+
+  h2 {
+    font-family: 'Press Start 2P', monospace;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    margin: 15px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  
+  }
+  
+  p {
+    font-family: 'Press Start 2P', monospace;
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    justify-content: center;
+    line-height: 40px;
+    margin: 0 25%;
+  }
+
+  .btn{
+
+
+    width: 300px;
+    height: 300px;
+
+  }
+
+  .btn:hover{
+
+    background-color: white;
+    color: black;
+
+  }
+
+  #btn-back {
+    background-color: red;
+    border: white;
+    color: white;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    text-decoration:none;
+    border-radius: 10px;
+    display:flex;
+    font-size: 20px;
+    position: relative ;
+    left: 10px;
+    top: 10px;
+    cursor: pointer;
+    width: 100px;
+    height: 50px;
+    background-image: url(assets/images/blood.gif);
+  }
+
+  #btn-back:hover {
+    background-color: white;
+    color: black;
+  }
