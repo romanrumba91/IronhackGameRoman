@@ -11,20 +11,33 @@ let requestID;
 var interval = null
 let bullets = []
 let frames =0 
-let score = 0
+const imagezom = new Image()
+imagezom.src = "assets/images/z5.png"
+const neighbord = []
+const imageZombies = ["assets/images/z13.png","assets/images/h10.png", "assets/images/j9.png"]
 //let neighbord = ["assets/images/inspector.png","assets/images/maestra.png", "assets/images/nina.png","assets/images/perro.png", "assets/images/porrista.png", "assets/images/soldado.png", "assets/images/vacacionistas.png","assets/images/bebe.png","assets/images/nina.png"]
 //var elapsedTime = 2
 //var counter = 0
 // Clase BackGround
-const neighbord = []
+//const neighbord = []
+const arrayZombi = []
+const enemies = []
+
+const porristaArray = []
+const ninaArray = []
+const perroArray = []
+const bebeArray = []
+const soldadoArray = []
+const vacacionistasArray = []
+const cocineroArray = []
 
 
 class Background{
     constructor(){
         //mis propiedades
-        this.x = 300;
+        this.x = 8;
         this.y = 25;
-        this.width = 800;
+        this.width = 1000;
         this.height = 700;
         this.image = new Image();
         this.image.src = "assets/images/backGround.PNG"
@@ -34,12 +47,24 @@ class Background{
     draw() {
         
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height)
+        
         //ctx.drawImage(this.image, this.x, this.y, this.width, this.height)
     }
 
     gameOver(){
-        ctx.font = "80px Arial"
-        ctx.fillText("Te moriste banda!! u.u",150,150)
+        ctx.fillStyle = "white"
+        ctx.font = "100px Arial"
+        ctx.fillText("Game Over",150,150)
+    }
+
+    win(){
+        ctx.fillStyle = "white"
+        ctx.font = "100px Arial"
+        ctx.fillText("Winner!",150,150)
+    }
+
+    puntos(){
+        ctx.fillText(`You saved ${zeke.score} neighbords`,150,300)
     }
 }
  //Instancia Zeke
@@ -101,6 +126,8 @@ class ZekePersonaje{
         this.image = new Image()
         this.image.src = "assets/images/bala.png"
         this.direction = ""
+        this.score = 0
+        this.life = 3
         
 
 
@@ -125,6 +152,9 @@ class ZekePersonaje{
             break;
         }
 
+        
+
+
     }
 
     collision(item){
@@ -136,18 +166,12 @@ class ZekePersonaje{
         )
     }
 
-    score(){
-        let score = 0
-        score= score+100
-        ctx.fillStyle="black"
-        ctx.font = '20px Arial';
-        ctx.fillText(`Score ${score}`, 15, 25);
-
-    }
-
 
     
+
 }
+
+
 
 class Bebe{
     constructor(x,y){
@@ -161,9 +185,18 @@ class Bebe{
     }
     draw(){
 
-        //setInterval(move(),2000)
+
         ctx.drawImage(this.image1,this.x,this.y,this.width,this.height)
-        //console.log(this.imageActual)
+
+    }
+
+    collision(item){
+        return(
+            this.x < item.x + item.width &&
+            this.x + this.width > item.x &&
+            this.y < item.y + item.height &&
+            this.y + this.height > item.y
+        )
     }
 
     
@@ -185,6 +218,15 @@ class Cooker{
         ctx.drawImage(this.image1,this.x,this.y,this.width,this.height)
         //console.log(this.imageActual)
     }
+
+    collision(item){
+        return(
+            this.x < item.x + item.width &&
+            this.x + this.width > item.x &&
+            this.y < item.y + item.height &&
+            this.y + this.height > item.y
+        )
+    }
     
 } 
 
@@ -203,6 +245,15 @@ class Leader{
         //setInterval(move(),2000)
         ctx.drawImage(this.image1,this.x,this.y,this.width,this.height)
         //console.log(this.imageActual)
+    }
+
+    collision(item){
+        return(
+            this.x < item.x + item.width &&
+            this.x + this.width > item.x &&
+            this.y < item.y + item.height &&
+            this.y + this.height > item.y
+        )
     }
     
 } 
@@ -223,6 +274,14 @@ class Dog{
         ctx.drawImage(this.image1,this.x,this.y,this.width,this.height)
         //console.log(this.imageActual)
     }
+    collision(item){
+        return(
+            this.x < item.x + item.width &&
+            this.x + this.width > item.x &&
+            this.y < item.y + item.height &&
+            this.y + this.height > item.y
+        )
+    }
     
 } 
 class Couple{
@@ -240,6 +299,15 @@ class Couple{
         //setInterval(move(),2000)
         ctx.drawImage(this.image1,this.x,this.y,this.width,this.height)
         //console.log(this.imageActual)
+    }
+
+    collision(item){
+        return(
+            this.x < item.x + item.width &&
+            this.x + this.width > item.x &&
+            this.y < item.y + item.height &&
+            this.y + this.height > item.y
+        )
     }
     
 } 
@@ -259,6 +327,15 @@ class Soldier{
         ctx.drawImage(this.image1,this.x,this.y,this.width,this.height)
         //console.log(this.imageActual)
     }
+
+    collision(item){
+        return(
+            this.x < item.x + item.width &&
+            this.x + this.width > item.x &&
+            this.y < item.y + item.height &&
+            this.y + this.height > item.y
+        )
+    }
     
 } 
 
@@ -277,6 +354,15 @@ class Girl{
         //setInterval(move(),2000)
         ctx.drawImage(this.image1,this.x,this.y,this.width,this.height)
         //console.log(this.imageActual)
+    }
+
+    collision(item){
+        return(
+            this.x < item.x + item.width &&
+            this.x + this.width > item.x &&
+            this.y < item.y + item.height &&
+            this.y + this.height > item.y
+        )
     }
     
 } 
@@ -327,57 +413,256 @@ class Bullet {
     
 }
 
+class CharacterZombie {
+    constructor(x,y,w,h,img){
+        this.x = x;
+        this.y = y;
+        this.width = w;
+        this.height = h;
+        this.image = new Image()
+        this.image.src = img
+    }
+    //metodos
+    draw(){
+        if(frames % 10 === 0) {
+            this.x -= 5;
+        }
+        ctx.drawImage(this.image, this.x, this.y, this.width, this.height)
+    }
+    collision(item){
+        return(
+            this.x < item.x + item.width &&
+            this.x + this.width > item.x &&
+            this.y < item.y + item.height &&
+            this.y + this.height > item.y
+        )
+    }
+}
+
+
+
+
+
+
 //Instancias
 const fondo = new Background()
-const zeke = new ZekePersonaje(350,60,40,50)
-const cocinero = new Cooker(980,70,60,60)
-const porrista = new Leader(1010,200,60,60)
-const perro = new Dog(350,630,60,60)
-const vacacionistas = new Couple(580,495,60,60)
-const soldado = new Soldier(420,210,60,60)
-const nina = new Girl(990,600,60,60)
+const zeke = new ZekePersonaje(110,60,40,50)
+//const cocinero = new Cooker(980,70,60,60)
+//const porrista = new Leader(1010,200,60,60)
+//const perro = new Dog(350,630,60,60)
+//const vacacionistas = new Couple(580,495,60,60)
+//const soldado = new Soldier(420,210,60,60)
+//const nina = new Girl(990,600,60,60)
 
-function drawNeighbord(){
-    
-    const bebe = new Bebe(720,70,60,60)
-    neighbord.push(bebe)
 
-    neighbord.forEach((bebe,index_bebe) =>{
-        bebe.draw()    
+
+
+const nina = new Girl(690,600,60,60)
+function drawNeighbordNina(){
+
+    if(frames === 1){
+
+    ninaArray.push(nina)
+    console.log(ninaArray)
+}
+
+    ninaArray.forEach((nina,index_nina) =>{
+        nina.draw()    
+
+
+    if(zeke.collision(nina)){
+        console.log("Me esta tocando")
+        zeke.score ++
+        ninaArray.splice(index_nina,1)
+        console.log(ninaArray)
+        //zeke.score()
+        
+    }
+
+
+    })    
+   
+}
+const soldado = new Soldier(180,210,60,60)
+function drawNeighbordSoldado(){
+
+    if(frames === 1){
+
+    soldadoArray.push(soldado)
+    console.log(soldadoArray)
+}
+
+    soldadoArray.forEach((soldado,index_soldado) =>{
+        soldado.draw()    
+
+
+    if(zeke.collision(soldado)){
+        console.log("Me esta tocando")
+        zeke.score ++;
+        soldadoArray.splice(index_soldado,1);
+        console.log(soldadoArray)
+        //zeke.score()
+        
+    }
+
+
+    })    
+   
+}
+const vacacionistas = new Couple(350,495,60,60)
+function drawNeighbordVacacionista(){
+
+    if(frames === 1){
+
+    vacacionistasArray.push(vacacionistas)
+    console.log(vacacionistasArray)
+}
+
+    vacacionistasArray.forEach((vacacionistas,index_vacacionistas) =>{
+    vacacionistas.draw()    
+
+
+    if(zeke.collision(vacacionistas)){
+        console.log("Me esta tocando")
+        zeke.score ++
+        vacacionistasArray.splice(index_vacacionistas,1)
+        console.log(vacacionistasArray)
+        //zeke.score()
+        
+    }
+
+
+    })    
+   
+}
+
+const perro = new Dog(250,630,60,60)
+function drawNeighbordPerro(){
+
+    if(frames === 1){
+
+    perroArray.push(perro)
+    console.log(perroArray)
+}
+
+    perroArray.forEach((perro,index_perro) =>{
+    perro.draw()    
+
+
+    if(zeke.collision(perro)){
+        console.log("Me esta tocando")
+        zeke.score ++
+        perroArray.splice(index_perro,1)
+        console.log(perroArray)
+        //zeke.score()
+        
+    }
+
+
+    })    
+   
+}
+
+const bebe = new Bebe(470,70,60,60)
+function drawNeighbordBebe(){
+
+            if(frames === 1){
+
+            bebeArray.push(bebe)
+            console.log(bebeArray)
+        }
+
+            bebeArray.forEach((bebe,index_bebe) =>{
+            bebe.draw()    
     
-        if(zeke.collision(bebe)){
+
+            if(zeke.collision(bebe)){
+                console.log("Me esta tocando")
+                zeke.score ++
+                bebeArray.splice(index_bebe,1)
+
+                //requestID = undefined
+                //console.log(score)
+                
+                //console.log(zeke.score)
+                
+            }
+
+
+            })
+            //zeke.score()   
+           
+}
+const cocinero = new Cooker(780,70,60,60)
+
+function drawNeighbordCocinero(){
+
+        if(frames === 1){
+
+        cocineroArray.push(cocinero)
+        console.log(cocineroArray)
+    }
+
+        cocineroArray.forEach((cocinero,index_cocinero) =>{
+        cocinero.draw()    
+
+
+    if(zeke.collision(cocinero)){
+        console.log("Me esta tocando")
+        zeke.score ++
+        cocineroArray.splice(index_cocinero,1)
+        console.log(cocineroArray)
+        //zeke.score()
+        
+    }
+
+
+    }) 
+   
+}
+const porrista = new Leader(700,200,60,60)
+
+function drawNeighbordPorrista(){
+
+    if(frames === 1){
+        
+        porristaArray.push(porrista)
+        console.log(porristaArray)
+    }
+
+    porristaArray.forEach((porrista,index_porrista) =>{
+        porrista.draw()    
+
+
+        if(zeke.collision(porrista)){
             console.log("Me esta tocando")
             zeke.score ++
-            neighbord.splice(index_bebe,1,'')
-            console.log(neighbord)
+            porristaArray.splice(index_porrista,1)
+            console.log(porristaArray)
             //zeke.score()
-            
+        
         }
+
+
     })    
-    
+
+
+
 }
 
-function drawBullets(){
+function status(){
 
-        bullets.forEach((bullet,index_bullet) =>{
-        bullet.draw()
-        //validar si choca con un enemigo
+    if(zeke.score >= 5){
+        return "ganaste"
+    }
 
-       
-        //sacar la bala si se sale del canvas
-        if(bullet.x <= 300 || bullet.x+bullet.width>= 1100){ // bullet.x <= 0 || bullet.x+bullet.width>= 1300
-            bullets.splice(index_bullet,1)
-            console.log(bullets)
-        }else if(bullet.y <= 50 || bullet.y+bullet.height>= 730){ //bullet.x + bullet.width >= 800 bullet.y <= 0 || bullet.y+bullet.height>= 750
-            bullets.splice(index_bullet,1)
-        }
-    })
 }
+function statusLose(){
 
-
-
-
-
+    if(zeke.life === 0){
+        return "perdiste"
+    }
+}
 
 
 function updateCanvas(){
@@ -386,14 +671,42 @@ function updateCanvas(){
     fondo.draw()
     zeke.draw()
     //bebe.draw()
-    cocinero.draw()
-    porrista.draw()
-    perro.draw()
-    vacacionistas.draw()
-    soldado.draw()
-    nina.draw()
-    drawBullets()
-    drawNeighbord()
+    //cocinero.draw()
+    //porrista.draw()
+    //perro.draw()
+    //vacacionistas.draw()
+    //soldado.draw()
+    //nina.draw()
+    //drawBullets()
+    drawNeighbordBebe()
+    drawNeighbordCocinero()
+    drawNeighbordPorrista()
+    drawNeighbordPerro()
+    drawNeighbordVacacionista()
+    drawNeighbordSoldado()
+    drawNeighbordNina()
+    generateZombies()
+    drawZombies()
+    lifeLeft()
+    
+
+    switch (status()){
+        case "ganaste":
+            fondo.win()
+            fondo.puntos()
+            requestID = null;
+        break;
+            
+    }
+
+    switch (statusLose()){
+        case "perdiste":
+            fondo.gameOver()
+            requestID = null;
+        break;
+            
+    }
+    
 
     if(requestID){
         requestID = requestAnimationFrame(updateCanvas)
@@ -403,10 +716,124 @@ function updateCanvas(){
 // imprime el juego a html
 function startGame() {
 
-    //ctx.clearRect(0, 0, canvas.width, canvas.height)
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
     requestID = requestAnimationFrame(updateCanvas)
 }
 startGame()
+
+
+function generateZombies(){
+
+    //decirle en que intervalo de tiempo quiero que se genere mi enemigo
+    if(frames % 1100===0 || frames % 3860 === 0 || frames % 500 ===0){
+        let y = Math.floor(Math.random() * (600 - 70) ) + 70
+        let imgRand = Math.floor(Math.random() * imageZombies.length)
+        const zoMbie = new CharacterZombie (canvas.width,y,50,50,imageZombies[imgRand])
+        enemies.push(zoMbie)
+    }
+
+
+
+}
+
+function drawZombies(){
+
+    //const bebe = new Bebe(470,70,60,60)
+
+        enemies.forEach((zoMbie,index_zoMbie) =>{
+            zoMbie.draw()
+
+            if(zeke.collision(zoMbie)){
+
+                requestID = null
+                fondo.gameOver()
+
+            }
+            
+            if(porrista.collision(zoMbie)){
+                
+                zeke.life ++
+                porristaArray.splice(0,1)
+                console.log(porristaArray)
+            }
+            
+            if(bebe.collision(zoMbie)){
+                
+                zeke.life ++
+                bebeArray.splice(0,1)
+                console.log(bebeArray)
+            }
+            
+            if(soldado.collision(zoMbie)){
+                
+                zeke.life ++
+                soldadoArray.splice(0,1)
+                console.log(soldadoArray)
+            }
+            
+            if(cocinero.collision(zoMbie)){
+                
+                zeke.life ++
+                cocineroArray.splice(0,1)
+                console.log(cocineroArray)
+            }
+            
+            if(nina.collision(zoMbie)){
+                
+                zeke.life ++
+                ninaArray.splice(0,1)
+                console.log(ninaArray)
+            }
+            
+            if(perro.collision(zoMbie)){
+                
+                zeke.life ++
+                perroArray.splice(0,1)
+                console.log(perroArray)
+            }
+            
+            if(vacacionistas.collision(zoMbie)){
+                
+                zeke.life ++
+                vacacionistasArray.splice(0,1)
+                console.log(vacacionistasArray)
+            }
+            
+
+            bullets.forEach((bullet,index_bullet) =>{
+                    bullet.draw()
+
+
+                    if( zoMbie.collision(bullet)){
+                        enemies.splice(index_zoMbie,1)
+            
+                    }
+
+                    if(bullet.x <= 300 || bullet.x+bullet.width>= 1100){ // bullet.x <= 0 || bullet.x+bullet.width>= 1300
+                        bullets.splice(index_bullet,1)
+                        //console.log(bullets)
+                    }else if(bullet.y <= 50 || bullet.y+bullet.height>= 730){ //bullet.x + bullet.width >= 800 bullet.y <= 0 || bullet.y+bullet.height>= 750
+                        bullets.splice(index_bullet,1)
+                    }
+            
+            
+                    if (zoMbie.x + canvas.width + 1000 <= 200){
+                        enemies.splice(index_zoMbie,1)
+                    }
+            })
+
+        })
+
+
+}
+
+function lifeLeft (){
+    ctx.fillStyle="white"
+    ctx.font = 100%
+    ctx.fillText(`Lifes: ${zeke.life}`,40,20)
+
+}
+
 
 
 //Mover a Zeke
@@ -417,26 +844,37 @@ addEventListener("keydown",(event) => {
     if(key === 37) {
         //ZekePersonaje.left()
         zeke.direction = "izquierda"
-        zeke.x -= 20; 
-        console.log(key)
+        //350 < 1000-500
+        if(zeke.x >=50){
+            zeke.x -= 20; 
+            console.log(key)
+        }
+
     }
     //derecha
     if(key === 39){
-        zeke.direction = "derecha"
-        zeke.x += 20
-        console.log(key)
+        if(zeke.x + 800 <=1750){
+            zeke.direction = "derecha"
+            zeke.x += 20
+            console.log(key)
+        }
+
     }
     //arriba
     if(key ===38){
-        zeke.direction = "arriba"
-        zeke.y -= 20;
-        console.log(key)
+        if(zeke.y >=50){
+            zeke.direction = "arriba"
+            zeke.y -= 20;
+            console.log(key)
+        }
     }
     //abajo
     if (key === 40){
-        zeke.direction = "abajo"
-        zeke.y +=20;
-        console.log(key)
+        if(zeke.y <=630){
+            zeke.direction = "abajo"
+            zeke.y +=20;
+            console.log(key)
+        }
     }
     if (key === 75){
         const bullet = new Bullet(zeke.x, zeke.y,zeke.direction)
