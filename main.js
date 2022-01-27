@@ -7,6 +7,18 @@ const ctx = canvas.getContext("2d");
 let audio = new Audio()
 audio.loop = false
 audio.src= "assets/music/03 Zombie Panic.mp3"
+let audioShoot = new Audio()
+audioShoot.loop = false
+audioShoot.src= "assets/music/disparo.mp3"
+let audioLose = new Audio()
+audioLose.loop = false
+audioLose.src= "assets/music/lose.mp3"
+let audioWinner = new Audio()
+audioWinner.loop = false
+audioWinner.src= "assets/music/winner.mp3"
+let audioNeighbord = new Audio()
+audioNeighbord.loop = false
+audioNeighbord.src= "assets/music/neighbord.mp3"
 let requestID;
 var interval = null
 let bullets = []
@@ -54,18 +66,18 @@ class Background{
     gameOver(){
         ctx.fillStyle = "white"
         ctx.font = "100px Arial"
-        ctx.fillText("Game Over",150,150)
+        ctx.fillText("Game Over",250,370)
     }
 
     win(){
         ctx.fillStyle = "white"
         ctx.font = "100px Arial"
-        ctx.fillText("Winner!",150,150)
+        ctx.fillText("Winner!",350,370)
     }
 
-    puntos(){
-        ctx.fillText(`You saved ${zeke.score} neighbords`,150,300)
-    }
+    //puntos(){
+    //    ctx.fillText(`You saved ${zeke.score} neighbords`,350,450)
+    //}
 }
  //Instancia Zeke
 
@@ -127,7 +139,7 @@ class ZekePersonaje{
         this.image.src = "assets/images/bala.png"
         this.direction = ""
         this.score = 0
-        this.life = 3
+        this.life = 0
         
 
 
@@ -475,6 +487,7 @@ function drawNeighbordNina(){
         zeke.score ++
         ninaArray.splice(index_nina,1)
         console.log(ninaArray)
+        audioNeighbord.play()
         //zeke.score()
         
     }
@@ -501,6 +514,7 @@ function drawNeighbordSoldado(){
         zeke.score ++;
         soldadoArray.splice(index_soldado,1);
         console.log(soldadoArray)
+        audioNeighbord.play()
         //zeke.score()
         
     }
@@ -527,6 +541,7 @@ function drawNeighbordVacacionista(){
         zeke.score ++
         vacacionistasArray.splice(index_vacacionistas,1)
         console.log(vacacionistasArray)
+        audioNeighbord.play()
         //zeke.score()
         
     }
@@ -554,6 +569,7 @@ function drawNeighbordPerro(){
         zeke.score ++
         perroArray.splice(index_perro,1)
         console.log(perroArray)
+        audioNeighbord.play()
         //zeke.score()
         
     }
@@ -580,6 +596,7 @@ function drawNeighbordBebe(){
                 console.log("Me esta tocando")
                 zeke.score ++
                 bebeArray.splice(index_bebe,1)
+                audioNeighbord.play()
 
                 //requestID = undefined
                 //console.log(score)
@@ -611,6 +628,7 @@ function drawNeighbordCocinero(){
         console.log("Me esta tocando")
         zeke.score ++
         cocineroArray.splice(index_cocinero,1)
+        audioNeighbord.play()
         console.log(cocineroArray)
         //zeke.score()
         
@@ -639,6 +657,7 @@ function drawNeighbordPorrista(){
             zeke.score ++
             porristaArray.splice(index_porrista,1)
             console.log(porristaArray)
+            audioNeighbord.play()
             //zeke.score()
         
         }
@@ -652,14 +671,14 @@ function drawNeighbordPorrista(){
 
 function status(){
 
-    if(zeke.score >= 5){
+    if(zeke.score === 7){
         return "ganaste"
     }
 
 }
 function statusLose(){
 
-    if(zeke.life === 0){
+    if(zeke.life === 3){
         return "perdiste"
     }
 }
@@ -693,7 +712,8 @@ function updateCanvas(){
     switch (status()){
         case "ganaste":
             fondo.win()
-            fondo.puntos()
+            audioWinner.play()
+            //fondo.puntos()
             requestID = null;
         break;
             
@@ -702,6 +722,7 @@ function updateCanvas(){
     switch (statusLose()){
         case "perdiste":
             fondo.gameOver()
+            audioLose.play()
             requestID = null;
         break;
             
@@ -724,7 +745,7 @@ startGame()
 
 function generateZombies(){
 
-    //decirle en que intervalo de tiempo quiero que se genere mi enemigo
+    //decirle en que intervalo de tiempo quiero que se genere mi enemigo 1100 3860 500
     if(frames % 1100===0 || frames % 3860 === 0 || frames % 500 ===0){
         let y = Math.floor(Math.random() * (600 - 70) ) + 70
         let imgRand = Math.floor(Math.random() * imageZombies.length)
@@ -749,9 +770,9 @@ function drawZombies(){
                 fondo.gameOver()
 
             }
-            
+
             if(porrista.collision(zoMbie)){
-                
+                        
                 zeke.life ++
                 porristaArray.splice(0,1)
                 console.log(porristaArray)
@@ -791,15 +812,16 @@ function drawZombies(){
                 perroArray.splice(0,1)
                 console.log(perroArray)
             }
-            
+        
             if(vacacionistas.collision(zoMbie)){
                 
                 zeke.life ++
                 vacacionistasArray.splice(0,1)
                 console.log(vacacionistasArray)
             }
-            
 
+                    
+            
             bullets.forEach((bullet,index_bullet) =>{
                     bullet.draw()
 
@@ -809,7 +831,7 @@ function drawZombies(){
             
                     }
 
-                    if(bullet.x <= 300 || bullet.x+bullet.width>= 1100){ // bullet.x <= 0 || bullet.x+bullet.width>= 1300
+                    if(bullet.x <= 80 || bullet.x+bullet.width>= 1100){ // bullet.x <= 0 || bullet.x+bullet.width>= 1300
                         bullets.splice(index_bullet,1)
                         //console.log(bullets)
                     }else if(bullet.y <= 50 || bullet.y+bullet.height>= 730){ //bullet.x + bullet.width >= 800 bullet.y <= 0 || bullet.y+bullet.height>= 750
@@ -829,11 +851,10 @@ function drawZombies(){
 
 function lifeLeft (){
     ctx.fillStyle="white"
-    ctx.font = 100%
-    ctx.fillText(`Lifes: ${zeke.life}`,40,20)
+    ctx.font = "30px"
+    ctx.fillText(`Number of Saved Neighbors : ${zeke.score}`,40,20)
 
 }
-
 
 
 //Mover a Zeke
@@ -879,6 +900,7 @@ addEventListener("keydown",(event) => {
     if (key === 75){
         const bullet = new Bullet(zeke.x, zeke.y,zeke.direction)
         bullets.push(bullet)
+        audioShoot.play()
     
     }
 
