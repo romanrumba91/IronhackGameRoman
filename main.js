@@ -1,8 +1,9 @@
-// obtener el canvas del html
+// Obtener el canvas del html
 const canvas = document.getElementById("canvas");
 const sonido = document.getElementById('sound')
 
- // set up context
+
+ // Declaration
 const ctx = canvas.getContext("2d");
 let audio = new Audio()
 audio.loop = false
@@ -27,14 +28,8 @@ const imagezom = new Image()
 imagezom.src = "assets/images/z5.png"
 const neighbord = []
 const imageZombies = ["assets/images/z13.png","assets/images/h10.png", "assets/images/j9.png"]
-//let neighbord = ["assets/images/inspector.png","assets/images/maestra.png", "assets/images/nina.png","assets/images/perro.png", "assets/images/porrista.png", "assets/images/soldado.png", "assets/images/vacacionistas.png","assets/images/bebe.png","assets/images/nina.png"]
-//var elapsedTime = 2
-//var counter = 0
-// Clase BackGround
-//const neighbord = []
 const arrayZombi = []
 const enemies = []
-
 const porristaArray = []
 const ninaArray = []
 const perroArray = []
@@ -43,7 +38,7 @@ const soldadoArray = []
 const vacacionistasArray = []
 const cocineroArray = []
 
-
+// Background Class
 class Background{
     constructor(){
         //mis propiedades
@@ -60,26 +55,22 @@ class Background{
         
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height)
         
-        //ctx.drawImage(this.image, this.x, this.y, this.width, this.height)
     }
-
+    //gameover
     gameOver(){
         ctx.fillStyle = "white"
         ctx.font = "100px Arial"
         ctx.fillText("Game Over",250,370)
     }
-
+    //win
     win(){
         ctx.fillStyle = "white"
         ctx.font = "100px Arial"
         ctx.fillText("Winner!",350,370)
     }
 
-    //puntos(){
-    //    ctx.fillText(`You saved ${zeke.score} neighbords`,350,450)
-    //}
 }
- //Instancia Zeke
+ // Zeke Class
 
 class ZekePersonaje{
     constructor(x,y,w,h){
@@ -164,9 +155,6 @@ class ZekePersonaje{
             break;
         }
 
-        
-
-
     }
 
     collision(item){
@@ -178,13 +166,9 @@ class ZekePersonaje{
         )
     }
 
-
-    
-
 }
 
-
-
+// Baby Class
 class Bebe{
     constructor(x,y){
         this.x = x
@@ -214,6 +198,7 @@ class Bebe{
     
 } 
 
+// Cooker Class
 class Cooker{
     constructor(x,y,w,h){
         this.x = x
@@ -242,6 +227,7 @@ class Cooker{
     
 } 
 
+// Cheerleader Class
 class Leader{
     constructor(x,y,w,h){
         this.x = x
@@ -269,7 +255,8 @@ class Leader{
     }
     
 } 
-  
+
+// Dog Class
 class Dog{
     constructor(x,y,w,h){
         this.x = x
@@ -296,6 +283,8 @@ class Dog{
     }
     
 } 
+
+//Couple Class
 class Couple{
     constructor(x,y,w,h){
         this.x = x
@@ -322,7 +311,9 @@ class Couple{
         )
     }
     
-} 
+}
+
+// Soldier Class
 class Soldier{
     constructor(x,y,w,h){
         this.x = x
@@ -351,6 +342,7 @@ class Soldier{
     
 } 
 
+// Girl Class
 class Girl{
     constructor(x,y,w,h){
         this.x = x
@@ -379,6 +371,7 @@ class Girl{
     
 } 
 
+// Bullet Class
 class Bullet {
     constructor(x,y,dir){
         this.x = x
@@ -425,6 +418,7 @@ class Bullet {
     
 }
 
+// CharacterZombie Class
 class CharacterZombie {
     constructor(x,y,w,h,img){
         this.x = x;
@@ -452,24 +446,19 @@ class CharacterZombie {
 }
 
 
-
-
-
-
 //Instancias
 const fondo = new Background()
 const zeke = new ZekePersonaje(110,60,40,50)
-//const cocinero = new Cooker(980,70,60,60)
-//const porrista = new Leader(1010,200,60,60)
-//const perro = new Dog(350,630,60,60)
-//const vacacionistas = new Couple(580,495,60,60)
-//const soldado = new Soldier(420,210,60,60)
-//const nina = new Girl(990,600,60,60)
-
-
-
-
 const nina = new Girl(690,600,60,60)
+const soldado = new Soldier(180,210,60,60)
+const vacacionistas = new Couple(350,495,60,60)
+const perro = new Dog(250,630,60,60)
+const bebe = new Bebe(470,70,60,60)
+const cocinero = new Cooker(780,70,60,60)
+const porrista = new Leader(700,200,60,60)
+
+
+//Function Nina
 function drawNeighbordNina(){
 
     if(frames === 1){
@@ -488,7 +477,6 @@ function drawNeighbordNina(){
         ninaArray.splice(index_nina,1)
         console.log(ninaArray)
         audioNeighbord.play()
-        //zeke.score()
         
     }
 
@@ -496,7 +484,8 @@ function drawNeighbordNina(){
     })    
    
 }
-const soldado = new Soldier(180,210,60,60)
+
+//Function Soldado
 function drawNeighbordSoldado(){
 
     if(frames === 1){
@@ -515,7 +504,6 @@ function drawNeighbordSoldado(){
         soldadoArray.splice(index_soldado,1);
         console.log(soldadoArray)
         audioNeighbord.play()
-        //zeke.score()
         
     }
 
@@ -523,7 +511,8 @@ function drawNeighbordSoldado(){
     })    
    
 }
-const vacacionistas = new Couple(350,495,60,60)
+
+// Function Vacacionista
 function drawNeighbordVacacionista(){
 
     if(frames === 1){
@@ -542,7 +531,6 @@ function drawNeighbordVacacionista(){
         vacacionistasArray.splice(index_vacacionistas,1)
         console.log(vacacionistasArray)
         audioNeighbord.play()
-        //zeke.score()
         
     }
 
@@ -551,7 +539,7 @@ function drawNeighbordVacacionista(){
    
 }
 
-const perro = new Dog(250,630,60,60)
+// Function Dog
 function drawNeighbordPerro(){
 
     if(frames === 1){
@@ -570,7 +558,6 @@ function drawNeighbordPerro(){
         perroArray.splice(index_perro,1)
         console.log(perroArray)
         audioNeighbord.play()
-        //zeke.score()
         
     }
 
@@ -579,7 +566,7 @@ function drawNeighbordPerro(){
    
 }
 
-const bebe = new Bebe(470,70,60,60)
+// Function Baby
 function drawNeighbordBebe(){
 
             if(frames === 1){
@@ -597,21 +584,15 @@ function drawNeighbordBebe(){
                 zeke.score ++
                 bebeArray.splice(index_bebe,1)
                 audioNeighbord.play()
-
-                //requestID = undefined
-                //console.log(score)
-                
-                //console.log(zeke.score)
                 
             }
 
-
             })
-            //zeke.score()   
+ 
            
 }
-const cocinero = new Cooker(780,70,60,60)
 
+// Function Cooker
 function drawNeighbordCocinero(){
 
         if(frames === 1){
@@ -630,7 +611,6 @@ function drawNeighbordCocinero(){
         cocineroArray.splice(index_cocinero,1)
         audioNeighbord.play()
         console.log(cocineroArray)
-        //zeke.score()
         
     }
 
@@ -638,8 +618,8 @@ function drawNeighbordCocinero(){
     }) 
    
 }
-const porrista = new Leader(700,200,60,60)
 
+// Function Cheerleader
 function drawNeighbordPorrista(){
 
     if(frames === 1){
@@ -658,7 +638,6 @@ function drawNeighbordPorrista(){
             porristaArray.splice(index_porrista,1)
             console.log(porristaArray)
             audioNeighbord.play()
-            //zeke.score()
         
         }
 
@@ -666,9 +645,9 @@ function drawNeighbordPorrista(){
     })    
 
 
-
 }
 
+// Status Win
 function status(){
 
     if(zeke.score === 7){
@@ -676,6 +655,7 @@ function status(){
     }
 
 }
+// Status Lose
 function statusLose(){
 
     if(zeke.life === 3){
@@ -683,20 +663,12 @@ function statusLose(){
     }
 }
 
-
+// Update Canvas
 function updateCanvas(){
     frames++
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     fondo.draw()
     zeke.draw()
-    //bebe.draw()
-    //cocinero.draw()
-    //porrista.draw()
-    //perro.draw()
-    //vacacionistas.draw()
-    //soldado.draw()
-    //nina.draw()
-    //drawBullets()
     drawNeighbordBebe()
     drawNeighbordCocinero()
     drawNeighbordPorrista()
@@ -742,7 +714,7 @@ function startGame() {
 }
 startGame()
 
-
+// Generate Zombies
 function generateZombies(){
 
     //decirle en que intervalo de tiempo quiero que se genere mi enemigo 1100 3860 500
@@ -757,9 +729,9 @@ function generateZombies(){
 
 }
 
+// Draw Zombies
 function drawZombies(){
 
-    //const bebe = new Bebe(470,70,60,60)
 
         enemies.forEach((zoMbie,index_zoMbie) =>{
             zoMbie.draw()
@@ -831,10 +803,10 @@ function drawZombies(){
             
                     }
 
-                    if(bullet.x <= 80 || bullet.x+bullet.width>= 1100){ // bullet.x <= 0 || bullet.x+bullet.width>= 1300
+                    if(bullet.x <= 80 || bullet.x+bullet.width>= 1100){ 
                         bullets.splice(index_bullet,1)
-                        //console.log(bullets)
-                    }else if(bullet.y <= 50 || bullet.y+bullet.height>= 730){ //bullet.x + bullet.width >= 800 bullet.y <= 0 || bullet.y+bullet.height>= 750
+
+                    }else if(bullet.y <= 50 || bullet.y+bullet.height>= 730){ 
                         bullets.splice(index_bullet,1)
                     }
             
@@ -849,6 +821,7 @@ function drawZombies(){
 
 }
 
+// Score 
 function lifeLeft (){
     ctx.fillStyle="white"
     ctx.font = "30px"
@@ -863,9 +836,7 @@ addEventListener("keydown",(event) => {
     let key = event.keyCode
     console.log(event)
     if(key === 37) {
-        //ZekePersonaje.left()
         zeke.direction = "izquierda"
-        //350 < 1000-500
         if(zeke.x >=50){
             zeke.x -= 20; 
             console.log(key)
@@ -905,17 +876,17 @@ addEventListener("keydown",(event) => {
     }
 
 })
-
+// Musica de juego
 sonido.addEventListener("click", function() {
 
     if(!audio.loop){
         audio.play()
         audio.loop = true
-        //console.log(audio.loop)
+        
     }else{
         audio.pause()
         audio.loop = false
-        //console.log(audio.loop)
+        
     }
 
 
