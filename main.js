@@ -61,6 +61,7 @@ class Background{
         ctx.fillStyle = "white"
         ctx.font = "100px Arial"
         ctx.fillText("Game Over",250,370)
+        audioLose.play()
     }
     //win
     win(){
@@ -742,56 +743,90 @@ function drawZombies(){
                 requestID = null
                 fondo.gameOver()
             }
+            
+            if(porristaArray === []){
 
-            if(porrista.collision(zoMbie)){
+            }else if(!porristaArray === []){
+
+                if(porrista.collision(zoMbie)){
                         
-                zeke.life ++
-                porristaArray.splice(0,1)
-                console.log(porristaArray)
+                    zeke.life ++
+                    porristaArray.splice(0,1)
+                    console.log(porristaArray)
+
+                }
+            
+            }
+
+            if(bebeArray === []){
+
+            }else if(!bebeArray === []){
+            
+                if(bebe.collision(zoMbie)){
+                    
+                    zeke.life ++
+                    bebeArray.splice(0,1)
+                    console.log(bebeArray)
+                }
+            }    
+            
+            if(soldadoArray === []){
+
+            }else if(!soldadoArray === []){
+                if(soldado.collision(zoMbie)){
+                    
+                    zeke.life ++
+                    soldadoArray.splice(0,1)
+                    console.log(soldadoArray)
+                }
             }
             
-            if(bebe.collision(zoMbie)){
+            if(cocineroArray === []){
+
+            }else if(!cocineroArray === []){
                 
-                zeke.life ++
-                bebeArray.splice(0,1)
-                console.log(bebeArray)
-            }
+                if(cocinero.collision(zoMbie)){
+                    
+                    zeke.life ++
+                    cocineroArray.splice(0,1)
+                    console.log(cocineroArray)
+                }
             
-            if(soldado.collision(zoMbie)){
+            }
+
+            if(ninaArray === []){
+
+            }else if(!ninaArray === []){
                 
-                zeke.life ++
-                soldadoArray.splice(0,1)
-                console.log(soldadoArray)
-            }
-            
-            if(cocinero.collision(zoMbie)){
-                
-                zeke.life ++
-                cocineroArray.splice(0,1)
-                console.log(cocineroArray)
-            }
-            
-            if(nina.collision(zoMbie)){
+                if(nina.collision(zoMbie)){
                 
                 zeke.life ++
                 ninaArray.splice(0,1)
                 console.log(ninaArray)
-            }
-            
-            if(perro.collision(zoMbie)){
-                
-                zeke.life ++
-                perroArray.splice(0,1)
-                console.log(perroArray)
-            }
-        
-            if(vacacionistas.collision(zoMbie)){
-                
-                zeke.life ++
-                vacacionistasArray.splice(0,1)
-                console.log(vacacionistasArray)
+                }
             }
 
+            if(perroArray === []){
+
+            }else if(!perroArray === []){
+                if(perro.collision(zoMbie)){
+                    
+                    zeke.life ++
+                    perroArray.splice(0,1)
+                    console.log(perroArray)
+                }
+            }
+        
+            if(vacacionistasArray === []){
+
+            }else if(!vacacionistasArray === []){
+                if(vacacionistas.collision(zoMbie)){
+                    
+                    zeke.life ++
+                    vacacionistasArray.splice(0,1)
+                    console.log(vacacionistasArray)
+                }
+            }
                     
             
             bullets.forEach((bullet,index_bullet) =>{
