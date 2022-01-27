@@ -687,6 +687,7 @@ function updateCanvas(){
             audioWinner.play()
             //fondo.puntos()
             requestID = null;
+            
         break;
             
     }
@@ -696,6 +697,7 @@ function updateCanvas(){
             fondo.gameOver()
             audioLose.play()
             requestID = null;
+            
         break;
             
     }
@@ -717,9 +719,9 @@ startGame()
 // Generate Zombies
 function generateZombies(){
 
-    //decirle en que intervalo de tiempo quiero que se genere mi enemigo 1100 3860 500
-    if(frames % 1100===0 || frames % 3860 === 0 || frames % 500 ===0){
-        let y = Math.floor(Math.random() * (600 - 70) ) + 70
+    //decirle en que intervalo de tiempo quiero que se genere mi enemigo 1100 3860 500 abajo 600 70 70
+    if(frames % 100===0 || frames % 660 === 0 || frames % 400 ===0){
+        let y = Math.floor(Math.random() * (600 - 70) ) + 100
         let imgRand = Math.floor(Math.random() * imageZombies.length)
         const zoMbie = new CharacterZombie (canvas.width,y,50,50,imageZombies[imgRand])
         enemies.push(zoMbie)
@@ -737,10 +739,8 @@ function drawZombies(){
             zoMbie.draw()
 
             if(zeke.collision(zoMbie)){
-
                 requestID = null
                 fondo.gameOver()
-
             }
 
             if(porrista.collision(zoMbie)){
