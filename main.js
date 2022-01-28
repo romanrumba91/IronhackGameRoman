@@ -218,12 +218,14 @@ class Cooker{
     }
 
     collision(item){
+
         return(
             this.x < item.x + item.width &&
             this.x + this.width > item.x &&
             this.y < item.y + item.height &&
             this.y + this.height > item.y
         )
+        
     }
     
 } 
@@ -436,13 +438,18 @@ class CharacterZombie {
         }
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height)
     }
-    collision(item){
-        return(
-            this.x < item.x + item.width &&
-            this.x + this.width > item.x &&
-            this.y < item.y + item.height &&
-            this.y + this.height > item.y
-        )
+    
+            
+        collision(item){
+
+
+            return(
+                this.x < item.x + item.width &&
+                this.x + this.width > item.x &&
+                this.y < item.y + item.height &&
+                this.y + this.height > item.y
+                    )
+            
     }
 }
 
@@ -585,6 +592,7 @@ function drawNeighbordBebe(){
                 zeke.score ++
                 bebeArray.splice(index_bebe,1)
                 audioNeighbord.play()
+                console.log(bebeArray)
                 
             }
 
@@ -745,72 +753,94 @@ function drawZombies(){
                 fondo.gameOver()
             }
             
+                if(porristaArray.length === 0){
 
-                if(porrista.collision(zoMbie)){
+                } else if(porristaArray.length !== 0){
+
+                
+                    
+                    if(porrista.collision(zoMbie)){
                         
                     zeke.life ++
                     porristaArray.splice(0,1)
                     console.log(porristaArray)
 
+                    }
                 }
             
-            
+                if(bebeArray.length === 0){
 
+                } else if(bebeArray.length !== 0){
 
-            
-                if(bebe.collision(zoMbie)){
+                    if(bebe.collision(zoMbie)){
                     
-                    zeke.life ++
-                    bebeArray.splice(0,1)
-                    console.log(bebeArray)
+                        zeke.life ++
+                        bebeArray.splice(0,1)
+                        console.log(bebeArray)
+                    }
+            
                 }
               
-            
+                if(soldadoArray.length === 0){
 
-                if(soldado.collision(zoMbie)){
-                    
-                    zeke.life ++
-                    soldadoArray.splice(0,1)
-                    console.log(soldadoArray)
+                } else if(soldadoArray.length !== 0){
+
+                    if(soldado.collision(zoMbie)){
+                        
+                        zeke.life ++
+                        soldadoArray.splice(0,1)
+                        console.log(soldadoArray)
+                    }
                 }
             
-            
+                
+                if(cocineroArray.length === 0){
+
+                } else if(cocineroArray.length !== 0){
 
                 
-                if(cocinero.collision(zoMbie)){
-                    
-                    zeke.life ++
-                    cocineroArray.splice(0,1)
-                    console.log(cocineroArray)
+                    if(cocinero.collision(zoMbie)){
+                        
+                        zeke.life ++
+                        cocineroArray.splice(0,1)
+                        console.log(cocineroArray)
+                    }
                 }
             
-            
+                if(ninaArray.length === 0){
 
+                } else if(ninaArray.length !== 0){
+                    
+                    if(nina.collision(zoMbie)){
+                    
+                    zeke.life ++
+                    ninaArray.splice(0,1)
+                    console.log(ninaArray)
+                    }
+                }
 
+                if(perroArray.length === 0){
+
+                } else if(perroArray.length !== 0){
+
+                    if(perro.collision(zoMbie)){
+                        
+                        zeke.life ++
+                        perroArray.splice(0,1)
+                        console.log(perroArray)
+                    }
+                }    
                 
-                if(nina.collision(zoMbie)){
-                
-                zeke.life ++
-                ninaArray.splice(0,1)
-                console.log(ninaArray)
-                }
-            
+                if(vacacionistasArray.length === 0){
 
+                } else if(vacacionistasArray.length !== 0){
 
-                if(perro.collision(zoMbie)){
-                    
-                    zeke.life ++
-                    perroArray.splice(0,1)
-                    console.log(perroArray)
-                }
-            
-        
-
-                if(vacacionistas.collision(zoMbie)){
-                    
-                    zeke.life ++
-                    vacacionistasArray.splice(0,1)
-                    console.log(vacacionistasArray)
+                    if(vacacionistas.collision(zoMbie)){
+                        
+                        zeke.life ++
+                        vacacionistasArray.splice(0,1)
+                        console.log(vacacionistasArray)
+                    }
                 }
             
                     
