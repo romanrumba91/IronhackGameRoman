@@ -611,12 +611,13 @@ function drawNeighbordCocinero(){
         zeke.score ++
         cocineroArray.splice(index_cocinero,1)
         audioNeighbord.play()
-        console.log(cocineroArray)
+        
+        //console.log(cocineroArray)
         
     }
-
-
+    
     }) 
+
    
 }
 
@@ -744,9 +745,6 @@ function drawZombies(){
                 fondo.gameOver()
             }
             
-            if(porristaArray === []){
-
-            }else if(!porristaArray === []){
 
                 if(porrista.collision(zoMbie)){
                         
@@ -756,11 +754,9 @@ function drawZombies(){
 
                 }
             
-            }
+            
 
-            if(bebeArray === []){
 
-            }else if(!bebeArray === []){
             
                 if(bebe.collision(zoMbie)){
                     
@@ -768,22 +764,18 @@ function drawZombies(){
                     bebeArray.splice(0,1)
                     console.log(bebeArray)
                 }
-            }    
+              
             
-            if(soldadoArray === []){
 
-            }else if(!soldadoArray === []){
                 if(soldado.collision(zoMbie)){
                     
                     zeke.life ++
                     soldadoArray.splice(0,1)
                     console.log(soldadoArray)
                 }
-            }
             
-            if(cocineroArray === []){
+            
 
-            }else if(!cocineroArray === []){
                 
                 if(cocinero.collision(zoMbie)){
                     
@@ -792,11 +784,9 @@ function drawZombies(){
                     console.log(cocineroArray)
                 }
             
-            }
+            
 
-            if(ninaArray === []){
 
-            }else if(!ninaArray === []){
                 
                 if(nina.collision(zoMbie)){
                 
@@ -804,29 +794,25 @@ function drawZombies(){
                 ninaArray.splice(0,1)
                 console.log(ninaArray)
                 }
-            }
+            
 
-            if(perroArray === []){
 
-            }else if(!perroArray === []){
                 if(perro.collision(zoMbie)){
                     
                     zeke.life ++
                     perroArray.splice(0,1)
                     console.log(perroArray)
                 }
-            }
+            
         
-            if(vacacionistasArray === []){
 
-            }else if(!vacacionistasArray === []){
                 if(vacacionistas.collision(zoMbie)){
                     
                     zeke.life ++
                     vacacionistasArray.splice(0,1)
                     console.log(vacacionistasArray)
                 }
-            }
+            
                     
             
             bullets.forEach((bullet,index_bullet) =>{
