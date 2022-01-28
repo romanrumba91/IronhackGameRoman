@@ -660,7 +660,7 @@ function drawNeighbordPorrista(){
 // Status Win
 function status(){
 
-    if(zeke.score === 7){
+    if(zeke.score >= 6){
         return "ganaste"
     }
 
@@ -668,7 +668,7 @@ function status(){
 // Status Lose
 function statusLose(){
 
-    if(zeke.life === 3){
+    if(zeke.life === 2){
         return "perdiste"
     }
 }
